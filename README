@@ -1,0 +1,19 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2288
+
+I compiled original Windows ctags source(http://ctags.sourceforge.net/) with a 4GL language extension to generate tags for functions(include report function), cursor IDs, prepared statement IDs, and global/module level variables. It works in XP and Vista according to my test. 
+
+It's even better when you use it with taglist.vim. It generate tags on the fly when you open 4gl programs in gvim/vim. For this add the following lines in taglist.vim. (Scroll down the plugin to a section where tag types are defined for different languages:)
+------------------------------------------------------------------------------------------------------------------
+" fgl language
+let s:tlist_def_fgl_settings = 'fgl;f:function;c:cursor;s:prepared;v:variable'
+------------------------------------------------------------------------------------------------------------------
+
+If you want to compile yourself, here is how I compiled:
+1. Download and extract, if necessary, BCC55(free Boland compiler) and ctags source for Windows from the web and 4GL extentionfrom 
+2. Create both bcc32.cfg and ilink.cfg in bin directory of BCC55 using Notepad. The contents of two files are the same as follows(of course, change the path if you have installed it in a different directory). Each file contains two lines.
+   -I"C:\Borland\BCC55\Include" 
+   -L"C:\Borland\BCC55\Lib;C:\Borland\BCC55\Lib\PSDK"
+3. You will probably have to add a bin path to your system 
+4. Download 4GL extenion from http://www.vim.org/scripts/script.php?script_id=587,and extract files(fgl.c ...) to your ctags source directory
+5. In ctags source directory, type "make -f mk_bc5.mak" to build ctags.exe
+
